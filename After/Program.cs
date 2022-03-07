@@ -1,7 +1,22 @@
-﻿class Program
+﻿namespace After;
+
+internal static class Program
 {
-    static void Main(string[] args)
+    private static void Main(string[] args)
     {
-        Console.WriteLine("fares");
+        StandardMessages.WelcomeMessage();
+
+        var user=PersonDataCapture.Capture();
+
+        var isUserValid = PersonValidator.Validate(user);
+
+        if (!isUserValid)
+        {
+            StandardMessages.EndApplication();
+            return;
+        }
+       
+        AccountGenerator.CreateAccount(user);
+        StandardMessages.EndApplication();
     }
 }
